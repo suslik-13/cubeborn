@@ -1,7 +1,8 @@
 -- Wolf (spec cycle 4, 8b): wild wolves are neutral (they fight back as a
 -- pack) and hunt skeletons; a bone tames one with a 1 in 3 chance. A tamed
 -- wolf becomes a mobs_redo helper ("npc"): it follows its owner, sits and
--- stands up on the owner's empty-hand right-click, fights monsters (not
+-- stands up on the owner's right-click (with anything but food, armour or
+-- shears; a name tag and a protection rune go to cb_core), fights monsters (not
 -- creepers), defends its owner and comes to them from afar. Raw meat heals
 -- and breeds it; wolf armour (armadillo scutes) takes the damage for it.
 local S = cb_mobs_animals.S
@@ -65,9 +66,9 @@ function A.tame_wolf(self, owner)
 	retexture(self)
 end
 
--- The owner's empty-hand click: sit down or stand up.
+-- The owner's click (with an item no other click uses): sit down or stand up.
 function A.wolf_order(self, clicker)
-	if not (self.tamed and self.owner == clicker:get_player_name()) or not clicker:get_wielded_item():is_empty() then
+	if not (self.tamed and self.owner == clicker:get_player_name()) then
 		return false
 	end
 	if self.order == "stand" then
