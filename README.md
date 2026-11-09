@@ -856,6 +856,17 @@ players within 50 nodes Mining Fatigue III, which all but stops digging for five
 prismarine, prismarine bricks, dark prismarine (stairs and slabs), sea lanterns, sponges (a dry sponge
 soaks up the water around it; a wet one dries in a furnace).
 
+## Gear of zombies and piglins (`cb_core/mob_gear.lua`)
+
+**Piglins** and **zombified piglins** hold a bronze or steel sword, **piglin brutes** a bronze or steel
+axe. About 15 % of zombies, husks, piglins and zombified piglins wear armour from 3d_armor (one to four
+pieces of one material: zombies steel, bronze or gold, piglins mostly gold), shown on the model (on
+piglins the helmet is worn but not shown). About 30 % of the swords and pieces are enchanted, at most
+as on an enchanting table at power 15 (never the best rolls). Armour makes them take less damage (full
+steel: about half; Protection lowers it more), Sharpness makes their hit stronger. Killed by a player,
+a mob drops all its armour and, 15 % of the time, its weapon, each worn by a random amount (15-85 % of
+its durability used), enchantments kept. A piglin that turns into a zombified piglin keeps its gear.
+
 ## Nether mobs (`cb_mobs_nether`, needs mobs_redo)
 
 They come in the Nether (our own on tiny, the `nether` mod's elsewhere). **Magma cubes** hop at players
@@ -898,7 +909,8 @@ the **skeleton skull** (floor or wall) decorate ancient cities.
 only experience (1 for sculk, 5 for the others). They only listen inside **ancient cities** (records of
 the structure registry), so elsewhere they cost nothing: every 0.5 s a player there who moves without
 sneaking wakes the sensors within 8, and a woken sensor, or stepping on a shrieker, makes the shriekers
-within 8 shriek. A shrieker the city placed raises that player's **warning level** (at most once every
+within 8 shriek. Players in creative mode (`creative_mode` or the `creative` privilege) are never heard,
+so test it without creative. A shrieker the city placed raises that player's **warning level** (at most once every
 10 s, one level lost per 10 minutes) and gives **darkness** for 13 s to players within 40; at level 4 it
 calls the warden. When a mob or player dies within 8 of a catalyst, up to 5 bare stone, dirt or
 deepslate blocks around it (inside the city, never protected ones) turn to sculk.
