@@ -188,6 +188,8 @@ Village and helpers:
    - `cubeborn.village_size_min`, `cubeborn.village_size_max` (default 8, 20), `cubeborn.difficulty = easy|normal|hard`
    - `cubeborn.xp = true|false` (default true): `false` turns experience off — no levels, orbs or bar;
      any gear can be worn and used; anvil repairs, enchanting and brewing cost no experience
+   - `cubeborn.structures_on_mapgen = true|false` (default false): `true` places every structure as the
+     world generates, for a server started on a new map (see `/cb_populate`)
 3. Before the first start on a live world, check that the pocket area is empty:
    `python3 tools/check_regions.py worlds/<world>/map.sqlite -2032 -2032 -2032 2047 -1500 2047`
 
@@ -204,7 +206,8 @@ Village and helpers:
   their share), spaced out, on free unprotected ground in fitting biomes. Areas the map generator
   has not made yet are skipped, nothing new is generated. `/cb_scatter status`, `/cb_scatter stop`;
   after a restart run it again. Structures appear only through these commands (and End cities when
-  the End is created): the pack adds nothing to the generation of new chunks except a few ores.
+  the End is created): the pack adds nothing to the generation of new chunks except a few ores —
+  unless `cubeborn.structures_on_mapgen` is on.
 - `/cb_populate [status|stop]` — fill the map that already exists with every structure at about
   Minecraft's frequency, in one run: creates the End pocket and (without the `nether` mod) the Nether
   pocket when missing, then strongholds in rings around 0,0 (3 at 1280–2816 nodes; more rings where the
@@ -219,6 +222,11 @@ Village and helpers:
   `cubeborn.populate_pause_s` 20 s after each structure); with nobody online at full speed; it waits
   while the server lags. After a restart `/cb_populate` continues where it stopped.
   `/cb_scatter` and `/cb_populate` do not run together.
+- With `cubeborn.structures_on_mapgen = true` the same steps run by themselves while the world
+  generates: each 1000×1000 square is filled a few seconds after it gets new land (again when more
+  of it is generated; the same spots as `/cb_populate`, so nothing comes twice), and the End and
+  Nether pockets are created at start when missing. A structure needs its whole area generated, so it
+  appears shortly after players reach the place. Admin fills go first; the square is filled later.
 - `/cb_nether_fill <radius> [y] | status | stop` — with the `nether` mod: add fortresses and bastions around
   the admin (or around 0,0 with a given `y`) near one height, so that players at that height meet them: one
   per 432×432 cell, 2 fortresses to 3 bastions. Unlike `/cb_populate` it generates map, but only each site's
