@@ -186,6 +186,8 @@ Village and helpers:
      generate terrain of their own, default `caverealms,riesenpilz`: their nodes do not count as builds)
    - `cubeborn.rare_respawn_hours` (default 24), `cubeborn.elytra_respawn_days` (default 7)
    - `cubeborn.village_size_min`, `cubeborn.village_size_max` (default 8, 20), `cubeborn.difficulty = easy|normal|hard`
+   - `cubeborn.xp = true|false` (default true): `false` turns experience off — no levels, orbs or bar;
+     any gear can be worn and used; anvil repairs, enchanting and brewing cost no experience
 3. Before the first start on a live world, check that the pocket area is empty:
    `python3 tools/check_regions.py worlds/<world>/map.sqlite -2032 -2032 -2032 2047 -1500 2047`
 
@@ -1037,6 +1039,8 @@ Levels and points (as in Minecraft): "Points" is the total a player needs to hav
 - **Death:** a quarter of the experience is lost and drops as orbs at the place of death; admins
   (`cb_admin` or `server`) lose and drop nothing.
 - **Leaderboard:** with `atl_server_statistics`, `/leaderboard` gets an Experience tab.
+- **Off switch:** `cubeborn.xp = false` in `minetest.conf` turns all of it off (no orbs, bar, `/xp`,
+  level limits or costs; enchanting takes only mese). Stored experience is kept for when it is back on.
 
 ## Mobs (`cb_mobs_dim`, needs mobs_redo)
 
