@@ -51,8 +51,8 @@ end
 core.register_node(D.SCULK, {
 	description = S("Sculk"),
 	tiles = { { name = tex("sculk"), animation = { type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 3, }, }, },
-	-- a faint glow: ancient cities are not pitch black
-	light_source = 3,
+	-- glows enough to light the caves around an ancient city
+	light_source = 11,
 	groups = { crumbly = 3, sculk = 1, },
 	drop = "",
 	is_ground_content = false,
@@ -70,7 +70,7 @@ core.register_node(D.VEIN, {
 	paramtype = "light",
 	paramtype2 = "wallmounted",
 	sunlight_propagates = true,
-	light_source = 2,
+	light_source = 8,
 	walkable = false,
 	buildable_to = true,
 	selection_box = { type = "wallmounted", },
@@ -126,12 +126,13 @@ core.register_node(D.CATALYST, {
 	after_dig_node = xp(5),
 })
 
--- Sculk and veins glow since 2026-11: the light of cities built before is
--- worked out again once, the first time each of their mapblocks loads.
+-- Sculk and veins glow since 2026-11 (brighter since the second LBM): the
+-- light of cities built before is worked out again once, the first time each
+-- of their mapblocks loads.
 local relit = {}
 core.register_lbm({
 	label = "cb_mobs_deep sculk glow",
-	name = "cb_mobs_deep:sculk_glow",
+	name = "cb_mobs_deep:sculk_glow_2",
 	nodenames = { D.SCULK, D.VEIN, },
 	run_at_every_load = false,
 	action = function(pos)
