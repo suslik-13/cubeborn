@@ -242,7 +242,7 @@ core.register_entity(NAME, {
 		textures = { "cb_mobs_dim_dragon.png", },
 		visual_size = { x = 3, y = 3, },
 		static_save = true,
-		glow = 4,
+		glow = 14, -- lit at full so it reads clearly against the dark End sky
 	},
 	on_activate = function(self, staticdata)
 		local data = core.deserialize(staticdata or "") or {}
