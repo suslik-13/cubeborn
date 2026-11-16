@@ -120,7 +120,10 @@ function cb_core.mob_unstick(self)
 		if cb_core.box_free(p, box) then
 			self.object:set_pos(p)
 			self.object:set_velocity(vector.zero())
-			self.standing_in = core.get_node(vector.new(p.x, p.y + box[2] + 0.25, p.z)).name
+			-- as mobs_redo's node_ok: an unknown node (no definition) reads as
+			-- air, or do_env_damage indexes a nil definition and the server dies
+			local name = core.get_node(vector.new(p.x, p.y + box[2] + 0.25, p.z)).name
+			self.standing_in = core.registered_nodes[name] and name or "air"
 			return true
 		end
 	end
